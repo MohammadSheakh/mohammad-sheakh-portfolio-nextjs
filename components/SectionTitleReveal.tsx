@@ -16,6 +16,7 @@ export default function SectionTitleReveal() {
         y: 40,
         opacity: 0,
         ease: "power3.out",
+        clearProps: "all",
       });
       if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
     });
@@ -25,3 +26,4 @@ export default function SectionTitleReveal() {
 
   return null;
 }
+
