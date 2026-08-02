@@ -56,46 +56,56 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="hero">
-      <div className="hero-circle"></div>
-      <div className="hero-circle2"></div>
-      <div className="hero-badge">
-        <span
-          style={{
-            width: 6,
-            height: 6,
-            background: "#4ade80",
-            borderRadius: "50%",
-            display: "inline-block",
-            boxShadow: "0 0 8px #4ade80",
-          }}
-        ></span>
-        AVAILABLE FOR BACKEND ROLES · DHAKA, BD
+    <section className="relative min-h-screen flex flex-col justify-between pt-36 pb-12 px-6 md:px-14 overflow-hidden bg-[linear-gradient(165deg,#f7f5fe_0%,#ece8fe_22%,#9f91f3_50%,#5f50c5_75%,#302476_100%)]">
+      {/* Decorative Circles */}
+      <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-white/30 blur-3xl pointer-events-none"></div>
+      <div className="absolute top-1/2 -right-32 w-[500px] h-[500px] rounded-full bg-purple-500/20 blur-3xl pointer-events-none"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        {/* Status Badge */}
+        <div className="hero-badge inline-flex items-center gap-2.5 py-2 px-4 rounded-full bg-white/40 dark:bg-black/30 border border-white/60 dark:border-white/10 backdrop-blur-md text-[0.68rem] font-bold tracking-[2px] uppercase text-neutral-800 dark:text-neutral-200 mb-6 shadow-sm">
+          <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_#4ade80]"></span>
+          AVAILABLE FOR BACKEND ROLES · DHAKA, BD
+        </div>
+
+        {/* Main Display Heading */}
+        <h1 className="hero-heading font-display font-black leading-[0.92] tracking-[-3px] text-[clamp(3.5rem,9vw,8.5rem)] mb-8" id="heroHead">
+          <span className="line1 block text-[#0b0b0b] font-black">Mohammad</span>
+          <span className="line2 block text-[#8e81bf] font-black">Sheakh</span>
+          <span className="line3 block text-white font-black">Backend.</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="hero-sub max-w-xl text-white/90 text-base md:text-lg leading-relaxed mb-10 font-medium">
+          I build the systems behind the product — scalable APIs, real-time
+          engines, and job queues that don&apos;t break under pressure. Node.js
+          · NestJS · TypeScript.
+        </p>
+
+        {/* Action Buttons */}
+        <div className="hero-actions flex flex-wrap items-center gap-4 mb-16">
+          <a
+            className="inline-flex items-center justify-center py-4 px-9 rounded-full bg-neutral-950 text-white font-bold text-sm tracking-wider uppercase no-underline transition-all duration-300 hover:scale-[1.04] hover:bg-black shadow-xl"
+            href="#work"
+          >
+            <span>See my work →</span>
+          </a>
+          <a
+            className="inline-flex items-center justify-center py-4 px-9 rounded-full bg-white/20 border border-white/40 text-white backdrop-blur-md font-bold text-sm tracking-wider uppercase no-underline transition-all duration-300 hover:bg-white/35 shadow-md"
+            href="mailto:mohammad.sheakh@gmail.com"
+          >
+            <span>Get in touch</span>
+          </a>
+        </div>
       </div>
-      <h1 className="hero-heading" id="heroHead">
-        <span className="line1">Mohammad</span>
-        <br />
-        <span className="line2">Sheakh</span>
-        <br />
-        <span className="line3">Backend.</span>
-      </h1>
-      <p className="hero-sub">
-        I build the systems behind the product — scalable APIs, real-time
-        engines, and job queues that don&apos;t break under pressure. Node.js
-        · NestJS · TypeScript.
-      </p>
-      <div className="hero-actions">
-        <a className="btn btn-hero-primary" href="#work">
-          <span>See my work →</span>
-        </a>
-        <a className="btn btn-hero-secondary" href="mailto:mohammad.sheakh@gmail.com">
-          <span>Get in touch</span>
-        </a>
-      </div>
-      <div className="hero-scroll">
-        <div className="scroll-line"></div>SCROLL TO EXPLORE
+
+      {/* Scroll Indicator */}
+      <div className="relative z-10 hero-scroll flex items-center gap-3 text-xs tracking-[3px] uppercase font-semibold text-white/70">
+        <div className="w-10 h-[1px] bg-white/50"></div>
+        <span>SCROLL TO EXPLORE</span>
       </div>
     </section>
   );
 }
+
 

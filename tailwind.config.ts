@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,9 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        purple: "#5B4FCF",
-        "purple-d": "#3D35A8",
-        "purple-pale": "#F0EEFF",
+        purple: {
+          DEFAULT: "#5B4FCF",
+          dark: "#3D35A8",
+          pale: "#F0EEFF",
+          light: "#8174DF",
+        },
         teal: "#0EA5A0",
         coral: "#F97316",
         bg: "#FAFAF8",
@@ -20,12 +24,14 @@ const config: Config = {
         borderc: "#E8E6E0",
       },
       fontFamily: {
-        sans: ["var(--font-space-grotesk)", "sans-serif"],
-        display: ["var(--font-archivo)", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "monospace"],
+        syne: ["var(--font-syne)", "Syne", "sans-serif"],
+        display: ["var(--font-display)", "Syne", "Archivo", "Space Grotesk", "sans-serif"],
+        sans: ["var(--font-sans)", "Space Grotesk", "sans-serif"],
+        mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
       },
     },
   },
   plugins: [],
 };
 export default config;
+

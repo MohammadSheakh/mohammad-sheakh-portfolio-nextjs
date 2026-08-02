@@ -138,19 +138,21 @@ body::before {
 /* LOGO WRAPPER */
 .logo-wrap {
   pointer-events: auto;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
+  flex-shrink: 0;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
+  will-change: transform, opacity;
 }
 
 .logo-wrap.visible {
   transform: translateX(0);
   opacity: 1;
-  visibility: visible;
 }
 
 .logo-wrap.hidden {
-  transform: translateX(-120%);
+  transform: translateX(-100px);
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
 }
 
@@ -174,8 +176,13 @@ body::before {
   padding: 0.35rem 0.35rem 0.35rem 1.4rem;
   border-radius: 50px;
   pointer-events: auto;
+  margin-left: auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar.scrolled:not(.expanded) .nav-capsule {
+  padding-left: 0.45rem;
 }
 
 html[data-theme="dark"] .nav-capsule {
@@ -204,7 +211,7 @@ html[data-theme="dark"] .nav-capsule {
 .nav-links-group.hidden {
   max-width: 0;
   opacity: 0;
-  transform: translateX(40px);
+  transform: translateX(20px);
   margin-right: 0;
   overflow: hidden;
   visibility: hidden;
@@ -229,18 +236,17 @@ html[data-theme="dark"] .nav-capsule {
 .nav-expand-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.55rem 1rem;
-  border-radius: 30px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   cursor: pointer;
-  margin-right: 0.5rem;
+  margin-right: 0.4rem;
+  padding: 0;
+  flex-shrink: 0;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   animation: expandBtnFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
