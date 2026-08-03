@@ -102,34 +102,49 @@ export default function StackCards() {
   }, []);
 
   return (
-    <section className="stack-section" id="work">
-      <div className="stack-header">
-        <div className="s-label">Selected projects</div>
-        <h2 className="s-title">Work that shipped.</h2>
+    <section className="bg-[#0a0a0a] py-28" id="work">
+      <div className="mb-20 px-6 md:px-12">
+        <div className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[3px] text-white/40">
+          Selected projects
+        </div>
+        <h2 className="s-title mb-8 font-display text-[clamp(2.5rem,5vw,4rem)] font-black leading-[0.95] tracking-[-2.5px] text-white">
+          Work that shipped.
+        </h2>
       </div>
 
-      <div className="stack-cards-wrap" ref={wrapRef}>
+      <div className="relative" ref={wrapRef}>
         {PROJECTS.map((p, i) => (
           <div
-            className="stack-card-outer"
+            className="stack-card-outer flex min-h-screen items-center py-5"
             style={{ zIndex: i + 1 }}
             key={p.title}
           >
-            <div className="sc">
+            <div className="sc mx-6 grid min-h-[400px] w-[calc(100%_-_3rem)] origin-center grid-cols-1 items-center gap-12 rounded-3xl border border-[#1f1f1f] bg-[#111] px-6 pb-12 will-change-[transform,opacity] md:mx-12 md:w-[calc(100%_-_6rem)] md:grid-cols-[1fr_1.1fr] md:px-12">
               <div>
-                <span className="sc-num">{p.num}</span>
-                <span className="sc-tag">{p.tag}</span>
-                <h3 className="sc-title">{p.title}</h3>
-                <p className="sc-desc">{p.desc}</p>
-                <div className="sc-pills">
+                <span className="mb-8 block pt-8 font-mono text-[0.72rem] tracking-[2px] text-[#444]">
+                  {p.num}
+                </span>
+                <span className="mb-5 inline-block rounded-full border border-[#2a2a2a] bg-[#1a1a1a] px-3 py-1 text-[0.68rem] uppercase tracking-[2px] text-[#666]">
+                  {p.tag}
+                </span>
+                <h3 className="mb-4 font-display text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-none tracking-[-1px] text-white">
+                  {p.title}
+                </h3>
+                <p className="mb-7 text-[0.85rem] leading-7 text-[#555]">
+                  {p.desc}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
                   {p.pills.map((pill) => (
-                    <span className="sc-pill" key={pill}>
+                    <span
+                      className="rounded-lg border border-[#222] bg-[#151515] px-2.5 py-1 font-mono text-[0.72rem] text-[#444]"
+                      key={pill}
+                    >
                       {pill}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="sc-visual">
+              <div className="relative h-60 overflow-hidden rounded-2xl border border-[#1a1a1a] bg-[#0a0a0a] p-6">
                 <WaveCanvas color={p.color} color2={p.color2} />
               </div>
             </div>

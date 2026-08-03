@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ICONS = [
   {
@@ -116,6 +116,7 @@ const ICONS = [
 
 export default function Icons() {
   const gridRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const grid = gridRef.current;
@@ -125,11 +126,7 @@ export default function Icons() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target
-              .querySelectorAll<HTMLDivElement>(".icon-box")
-              .forEach((b, i) => {
-                setTimeout(() => b.classList.add("in"), i * 80);
-              });
+            setVisible(true);
             io.unobserve(entry.target);
           }
         });
@@ -142,19 +139,37 @@ export default function Icons() {
   }, []);
 
   return (
-    <section className="icons-section" id="skills">
-      <div className="s-label">Tech stack</div>
-      <h2 className="s-title">
+    <section className="bg-[var(--surface)] px-6 py-20 md:px-12 md:py-28" id="skills">
+      <div className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[3px] text-purple">
+        Tech stack
+      </div>
+      <h2 className="s-title mb-8 font-display text-[clamp(2.5rem,5vw,4rem)] font-black leading-[0.95] tracking-[-2.5px]">
         Tools that
         <br />
         ship products.
       </h2>
-      <div className="icons-grid" ref={gridRef}>
-        {ICONS.map((icon) => (
-          <div className="icon-item" key={icon.name}>
-            <div className="icon-box">{icon.svg}</div>
-            <div className="icon-name">{icon.name}</div>
-            <div className="icon-type">{icon.type}</div>
+      <div className="mt-16 grid grid-cols-4 gap-6 md:grid-cols-8" ref={gridRef}>
+        {ICONS.map((icon, index) => (
+          <div className="text-center" key={icon.name}>
+            <div
+              className={`mx-auto mb-3 flex h-[72px] w-[72px] items-center justify-center rounded-[18px] border bg-[var(--bg)] transition-[transform,opacity,border-color] duration-300 hover:-translate-y-1 hover:border-purple [&_svg]:h-8 [&_svg]:w-8 ${
+                visible
+                  ? "translate-y-0 border-[var(--border)] opacity-100"
+                  : "translate-y-[30px] border-[var(--border)] opacity-0"
+              }`}
+              style={{ transitionDelay: `${index * 80}ms` }}
+              onTransitionEnd={(event) => {
+                event.currentTarget.style.transitionDelay = "0ms";
+              }}
+            >
+              {icon.svg}
+            </div>
+            <div className="text-[0.7rem] font-semibold tracking-[0.5px] text-[var(--text)]">
+              {icon.name}
+            </div>
+            <div className="mt-1 text-[0.65rem] text-[var(--muted)]">
+              {icon.type}
+            </div>
           </div>
         ))}
       </div>

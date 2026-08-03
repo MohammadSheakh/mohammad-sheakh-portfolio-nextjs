@@ -36,7 +36,7 @@ function CircuitSvg() {
       viewBox="0 0 2800 130"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ display: "inline-block" }}
+      className="inline-block"
     >
       <rect width="2800" height="130" fill="#0a0a0a" />
       <g stroke="#1c2e1c" strokeWidth="1">
@@ -77,8 +77,8 @@ function CircuitSvg() {
 
 export default function Circuit() {
   return (
-    <div className="circuit">
-      <div className="circuit-inner">
+    <div className="relative h-[130px] overflow-hidden bg-[#0a0a0a]">
+      <div className="absolute left-0 top-0 h-full animate-circuit whitespace-nowrap">
         <CircuitSvg />
         <CircuitSvg />
       </div>

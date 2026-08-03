@@ -19,7 +19,7 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className="theme-toggle"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/60 text-neutral-900 transition-[transform,background-color] duration-300 hover:rotate-[15deg] hover:bg-black/10 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
       onClick={toggle}
       aria-label="Toggle dark mode"
       type="button"

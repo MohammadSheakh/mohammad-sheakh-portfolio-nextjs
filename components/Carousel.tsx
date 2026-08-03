@@ -97,17 +97,17 @@ export default function Carousel() {
   };
 
   return (
-    <section className="carousel-section">
-      <div className="carousel-header">
-        <div className="s-label" style={{ color: "var(--purple)" }}>
+    <section className="overflow-hidden bg-[var(--purple-pale)] py-28">
+      <div className="mb-12 px-6 md:px-12">
+        <div className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[3px] text-purple">
           Core expertise
         </div>
-        <h2 className="s-title" style={{ color: "#0a0a0a" }}>
+        <h2 className="s-title mb-8 font-display text-[clamp(2.5rem,5vw,4rem)] font-black leading-[0.95] tracking-[-2.5px] text-[#0a0a0a]">
           What I do best.
         </h2>
       </div>
       <div
-        className="carousel-track"
+        className="flex cursor-none snap-x snap-mandatory gap-6 overflow-x-auto px-6 select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:px-12"
         ref={trackRef}
         onMouseDown={onMouseDown}
         onMouseLeave={onMouseLeave}
@@ -116,18 +116,39 @@ export default function Carousel() {
       >
         {CARDS.map((c, i) => (
           <div
-            className={`car-card${active === i ? " active" : ""}`}
+            className={`relative min-h-[400px] shrink-0 cursor-none snap-start overflow-hidden rounded-3xl transition-[flex-basis] duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              active === i ? "basis-[520px]" : "basis-[300px]"
+            }`}
             style={{ background: c.bg }}
             onClick={() => setActive(i)}
             key={c.title}
           >
-            <div className="car-bg">{c.bgSvg}</div>
-            <div className="car-inner">
-              <div className="car-lbl">{c.label}</div>
-              <div className="car-title">{c.title}</div>
-              <div className="car-body">{c.body}</div>
-              <div className="car-cta">
-                <a className="btn btn-white btn-sm" href="#">
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] [&_svg]:h-[200px] [&_svg]:w-[200px]">
+              {c.bgSvg}
+            </div>
+            <div className="relative z-[1] flex h-full flex-col justify-end p-10">
+              <div className="mb-2 text-[0.65rem] uppercase tracking-[2px] text-white/40">
+                {c.label}
+              </div>
+              <div className="font-display text-2xl font-black tracking-[-0.5px] text-white">
+                {c.title}
+              </div>
+              <div
+                className={`mt-3 overflow-hidden text-[0.82rem] leading-7 text-white/60 transition-[max-height,opacity] duration-500 ${
+                  active === i ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {c.body}
+              </div>
+              <div
+                className={`mt-4 overflow-hidden transition-[max-height,opacity] duration-500 ${
+                  active === i ? "max-h-[60px] opacity-100 delay-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                <a
+                  className="inline-flex items-center rounded-full border border-white/60 px-5 py-2 text-xs font-semibold tracking-wide text-white transition-colors duration-300 hover:bg-white hover:text-black"
+                  href="#"
+                >
                   <span>Explore →</span>
                 </a>
               </div>

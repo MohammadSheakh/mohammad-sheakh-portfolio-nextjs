@@ -25,7 +25,7 @@ export default function Nav() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 w-full z-[900] pointer-events-none flex justify-between items-center transition-[padding] duration-400 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 w-full z-[900] pointer-events-none flex justify-between items-center transition-[padding] duration-[400ms] ease-in-out ${
         scrolled ? "py-4 px-6 md:px-14" : "py-6 px-6 md:px-14"
       }`}
     >
@@ -112,7 +112,7 @@ export default function Nav() {
         {/* Permanent Open to Work Pill Button */}
         <a
           href="#contact"
-          className="inline-flex items-center gap-2.5 py-2.5 px-5 rounded-full bg-neutral-950 dark:bg-white text-white dark:text-neutral-950 text-[0.75rem] font-bold tracking-[1.2px] uppercase no-underline whitespace-nowrap transition-all duration-250 hover:scale-[1.04] shadow-md"
+          className="inline-flex items-center gap-2.5 py-2.5 px-5 rounded-full bg-neutral-950 dark:bg-white text-white dark:text-neutral-950 text-[0.75rem] font-bold tracking-[1.2px] uppercase no-underline whitespace-nowrap transition-all duration-[250ms] hover:scale-[1.04] shadow-md"
         >
           <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_#4ade80]"></span>
           <span>Open to work</span>
@@ -121,6 +121,5 @@ export default function Nav() {
     </nav>
   );
 }
-
 
 

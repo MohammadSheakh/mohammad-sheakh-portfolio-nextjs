@@ -29,9 +29,25 @@ const config: Config = {
         sans: ["var(--font-sans)", "Space Grotesk", "sans-serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
       },
+      keyframes: {
+        marquee: {
+          to: { transform: "translateX(-50%)" },
+        },
+        ringPulse: {
+          "0%, 100%": { transform: "scale(1)", opacity: "0.5" },
+          "50%": { transform: "scale(1.04)", opacity: "0.15" },
+        },
+        circuitScroll: {
+          to: { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 30s linear infinite",
+        ring: "ringPulse 4s ease-in-out infinite",
+        circuit: "circuitScroll 25s linear infinite",
+      },
     },
   },
   plugins: [],
 };
 export default config;
-

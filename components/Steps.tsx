@@ -23,44 +23,31 @@ const STEPS = [
 
 export default function Steps() {
   return (
-    <div style={{ padding: "0 0 3rem" }}>
-      <div className="steps-section">
-        <div
-          style={{
-            fontSize: "0.68rem",
-            letterSpacing: "3px",
-            textTransform: "uppercase",
-            color: "#F97316",
-            fontWeight: 600,
-            marginBottom: "0.5rem",
-            textAlign: "center",
-          }}
-        >
+    <div className="pb-12">
+      <section className="mx-8 rounded-[28px] bg-[var(--steps-bg)] px-6 py-20 md:px-12">
+        <div className="mb-2 text-center text-[0.68rem] font-semibold uppercase tracking-[3px] text-coral">
           My process
         </div>
-        <h2
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(2rem,4vw,3rem)",
-            fontWeight: 900,
-            letterSpacing: "-1.5px",
-            textAlign: "center",
-            marginBottom: "3rem",
-          }}
-        >
+        <h2 className="mb-12 text-center font-display text-[clamp(2rem,4vw,3rem)] font-black tracking-[-1.5px]">
           How I build things.
         </h2>
-        <div className="steps-grid">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {STEPS.map((s) => (
             <div key={s.n}>
-              <div className="step-n">{s.n}</div>
-              <div className="step-div"></div>
-              <div className="step-t">{s.t}</div>
-              <div className="step-d">{s.d}</div>
+              <div className="mb-3 font-display text-[3.5rem] font-black leading-none text-coral">
+                {s.n}
+              </div>
+              <div className="mb-4 h-0.5 w-10 bg-[var(--border)]"></div>
+              <div className="mb-1.5 text-sm font-bold tracking-[-0.3px]">
+                {s.t}
+              </div>
+              <div className="text-[0.78rem] leading-[1.65] text-[var(--muted)]">
+                {s.d}
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

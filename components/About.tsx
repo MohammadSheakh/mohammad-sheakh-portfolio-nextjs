@@ -91,7 +91,7 @@ export default function About() {
         {/* Right Column: Bento Cards */}
         <div className="bento lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
           {/* SparkTech Card (bc1) */}
-          <div className="bento-card bc1 sm:col-span-1 sm:row-span-2 min-h-[420px] rounded-3xl p-8 flex flex-col justify-between bg-[#eeebff] dark:bg-[#1c1836] border border-[#5b4fcf]/15 dark:border-[#8e81bf]/25 transition-transform duration-300 hover:-translate-y-1 shadow-sm">
+          <div className="bento-card bc1 relative overflow-hidden sm:col-span-1 sm:row-span-2 min-h-[420px] rounded-3xl p-8 flex flex-col justify-between bg-[#eeebff] dark:bg-[#1c1836] border border-[#5b4fcf]/15 dark:border-[#8e81bf]/25 transition-transform duration-300 hover:-translate-y-1 shadow-sm">
             <svg
               width="64"
               height="64"
@@ -115,7 +115,7 @@ export default function About() {
           </div>
 
           {/* AIUB - CSE Card (bc2) */}
-          <div className="bento-card bc2 rounded-3xl p-7 flex flex-col justify-end bg-[#e4fcf2] dark:bg-[#0f2b24] border border-[#0f766e]/15 dark:border-[#2dd4bf]/25 transition-transform duration-300 hover:-translate-y-1 shadow-sm min-h-[190px]">
+          <div className="bento-card bc2 relative overflow-hidden rounded-3xl p-7 flex flex-col justify-end bg-[#e4fcf2] dark:bg-[#0f2b24] border border-[#0f766e]/15 dark:border-[#2dd4bf]/25 transition-transform duration-300 hover:-translate-y-1 shadow-sm min-h-[190px]">
             <div className="text-[#0f766e] dark:text-[#2dd4bf] mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
@@ -137,7 +137,7 @@ export default function About() {
           </div>
 
           {/* 4+ Projects Card (bc3) */}
-          <div className="bento-card bc3 rounded-3xl p-7 flex flex-col justify-end bg-[#fff0e6] dark:bg-[#2e1a0e] border border-[#f97316]/15 dark:border-[#fb923c]/25 transition-transform duration-300 hover:-translate-y-1 shadow-sm min-h-[190px]">
+          <div className="bento-card bc3 relative overflow-hidden rounded-3xl p-7 flex flex-col justify-end bg-[#fff0e6] dark:bg-[#2e1a0e] border border-[#f97316]/15 dark:border-[#fb923c]/25 transition-transform duration-300 hover:-translate-y-1 shadow-sm min-h-[190px]">
             <div className="text-[#f97316] dark:text-[#fb923c] mb-4">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -155,5 +155,4 @@ export default function About() {
     </section>
   );
 }
-
 

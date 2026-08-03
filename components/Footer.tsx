@@ -1,16 +1,18 @@
 export default function Footer() {
   return (
-    <footer>
-      <div className="footer-grid">
+    <footer className="mx-8 mt-8 rounded-[28px] bg-[#111] p-6 md:p-14">
+      <div className="mb-6 grid grid-cols-1 gap-12 border-b border-[#222] pb-10 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
-          <div className="f-brand">Mohammad Sheakh</div>
-          <p className="f-desc">
+          <div className="mb-3 font-display text-sm font-black uppercase tracking-[2px] text-white">
+            Mohammad Sheakh
+          </div>
+          <p className="mb-6 max-w-[280px] text-[0.8rem] leading-7 text-[#555]">
             Backend developer building scalable systems in Dhaka, Bangladesh.
             Available for full-time roles and freelance projects.
           </p>
-          <div className="f-socials">
+          <div className="flex gap-3">
             <a
-              className="f-social"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2a2a2a] transition-colors hover:border-[#555] [&_svg]:h-4 [&_svg]:w-4"
               href="https://github.com/mohammadSheakh"
               target="_blank"
               rel="noreferrer"
@@ -23,7 +25,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              className="f-social"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2a2a2a] transition-colors hover:border-[#555] [&_svg]:h-4 [&_svg]:w-4"
               href="https://linkedin.com/in/mohammadsheakh"
               target="_blank"
               rel="noreferrer"
@@ -38,7 +40,10 @@ export default function Footer() {
                 <circle cx="4" cy="4" r="2" fill="#555" />
               </svg>
             </a>
-            <a className="f-social" href="mailto:mohammad.sheakh@gmail.com">
+            <a
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2a2a2a] transition-colors hover:border-[#555] [&_svg]:h-4 [&_svg]:w-4"
+              href="mailto:mohammad.sheakh@gmail.com"
+            >
               <svg viewBox="0 0 24 24" fill="none">
                 <rect x="2" y="4" width="20" height="16" rx="2" stroke="#555" strokeWidth="1.5" />
                 <path d="M2 7l10 7 10-7" stroke="#555" strokeWidth="1.5" />
@@ -47,8 +52,10 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <div className="f-col-title">Navigation</div>
-          <ul className="f-links">
+          <div className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[2px] text-[#444]">
+            Navigation
+          </div>
+          <ul className="flex list-none flex-col gap-2.5 [&_a]:text-[0.8rem] [&_a]:text-[#555] [&_a]:no-underline [&_a]:transition-colors [&_a:hover]:text-white">
             <li>
               <a href="#about">About</a>
             </li>
@@ -64,8 +71,10 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <div className="f-col-title">Contact</div>
-          <ul className="f-links">
+          <div className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[2px] text-[#444]">
+            Contact
+          </div>
+          <ul className="flex list-none flex-col gap-2.5 [&_a]:text-[0.8rem] [&_a]:text-[#555] [&_a]:no-underline [&_a]:transition-colors [&_a:hover]:text-white">
             <li>
               <a href="mailto:mohammad.sheakh@gmail.com">
                 mohammad.sheakh@gmail.com
@@ -83,11 +92,13 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="f-bottom">
+      <div className="flex flex-wrap items-center justify-between gap-2 [&_span]:text-[0.72rem] [&_span]:text-[#333]">
         <span>© 2026 Mohammad Sheakh</span>
-        <span style={{ color: "#333" }}>Backend Developer · Dhaka, Bangladesh</span>
+        <span>Backend Developer · Dhaka, Bangladesh</span>
       </div>
-      <div className="f-name">mohammadsheakh</div>
+      <div className="mt-6 h-[0.6em] overflow-hidden font-display text-[clamp(4rem,14vw,11rem)] font-black leading-[0.8] tracking-[-6px] text-[#1a1a1a] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0)_100%)] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0)_100%)]">
+        mohammadsheakh
+      </div>
     </footer>
   );
 }

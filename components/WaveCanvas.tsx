@@ -88,5 +88,7 @@ export default function WaveCanvas({
     return () => cancelAnimationFrame(raf);
   }, [color, color2]);
 
-  return <canvas ref={canvasRef} width={width} height={height}></canvas>;
+  return (
+    <canvas className="block" ref={canvasRef} width={width} height={height} />
+  );
 }
