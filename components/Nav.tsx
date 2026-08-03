@@ -35,8 +35,8 @@ export default function Nav() {
           isNavVisible ? "translate-x-0 opacity-100 visible" : "-translate-x-24 opacity-0 pointer-events-none"
         }`}
       >
-        <a href="#" className="font-display font-black text-lg tracking-[2px] uppercase text-neutral-900 dark:text-white no-underline">
-          MS
+        <a href="#" className="font-display font-black text-lg tracking-[2px] uppercase text-neutral-900 dark:text-neutral-900 no-underline">
+          Mohammad Sheakh
         </a>
       </div>
 

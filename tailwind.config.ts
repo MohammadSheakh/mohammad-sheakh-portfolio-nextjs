@@ -22,6 +22,8 @@ const config: Config = {
         ink: "#0A0A0A",
         muted: "#888888",
         borderc: "#E8E6E0",
+        footerColor: "#01484F",
+        PrimaryColorDark: "#01263F",
       },
       fontFamily: {
         syne: ["var(--font-syne)", "Syne", "sans-serif"],

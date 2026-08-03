@@ -7,12 +7,16 @@ import Carousel from "@/components/Carousel";
 import Gallery from "@/components/Gallery";
 import Deck from "@/components/Deck";
 import Icons from "@/components/Icons";
+import SkillSet from "@/components/SkillSet";
 import Experience from "@/components/Experience";
+import Testimonials from "@/components/Testimonials";
 import Steps from "@/components/Steps";
+import Feedback from "@/components/Feedback";
 import CircleCTA from "@/components/CircleCTA";
 import Circuit from "@/components/Circuit";
 import Footer from "@/components/Footer";
 import SectionTitleReveal from "@/components/SectionTitleReveal";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function Home() {
   return (
@@ -27,11 +31,15 @@ export default function Home() {
       <Gallery />
       <Deck />
       <Icons />
+      <SkillSet />
       <Experience />
+      <Testimonials />
       <Steps />
+      <Feedback />
       <CircleCTA />
       <Circuit />
       <Footer />
+      <ScrollToTop />
     </>
   );
 }
