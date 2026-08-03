@@ -96,8 +96,16 @@ export default function Footer() {
         <span>© 2026 Mohammad Sheakh</span>
         <span>Backend Developer · Dhaka, Bangladesh</span>
       </div>
-      <div className="mt-6 h-[0.6em] overflow-hidden font-display text-[clamp(4rem,14vw,11rem)] font-black leading-[0.8] tracking-[-6px] text-[#1a1a1a] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0)_100%)] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0)_100%)]">
-        mohammadsheakh
+      <div className="relative -mx-6 -mb-6 mt-8 h-[clamp(5.5rem,11.5vw,12rem)] overflow-hidden bg-[#111] text-center md:-mx-14 md:-mb-14 md:mt-12">
+        <div
+          className="absolute inset-x-0 -bottom-[0.12em] whitespace-nowrap text-[clamp(4.6rem,10.8vw,12rem)] font-light leading-[0.82] tracking-[-0.08em] text-white"
+          style={{
+            fontFamily: "var(--font-space-grotesk), Arial, sans-serif",
+          }}
+        >
+          mohammad sheakh
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[28%] bg-gradient-to-b from-transparent to-[#111]/25 backdrop-blur-[3px] [mask-image:linear-gradient(to_bottom,transparent,black)]" />
       </div>
     </footer>
   );
