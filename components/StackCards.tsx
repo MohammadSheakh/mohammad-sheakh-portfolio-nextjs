@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import WaveCanvas from "./WaveCanvas";
@@ -47,58 +47,42 @@ const PROJECTS = [
 export default function StackCards() {
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const cards =
-      wrapRef.current?.querySelectorAll<HTMLDivElement>(".sc") ?? [];
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLDivElement>(".sc");
+      const stickPosition = "top 100px";
 
-    const triggers: ScrollTrigger[] = [];
-    const STICK_POS = "top 100px";
+      cards.forEach((card, index) => {
+        const nextCard = cards[index + 1];
+        if (!nextCard) return;
 
-    cards.forEach((card, i) => {
-      const isLast = i === cards.length - 1;
-      const nextCard = cards[i + 1];
-
-      // Pin the card at a fixed position on screen. It stays there
-      // ("previous card thake upore") until the next card catches up
-      // to that same position, at which point this one releases. The
-      // last card isn't pinned — it settles into view and then scrolls
-      // away naturally since nothing follows it.
-      if (!isLast) {
-        const pinTrigger = ScrollTrigger.create({
+        ScrollTrigger.create({
           trigger: card,
-          start: STICK_POS,
-          end: STICK_POS,
+          start: stickPosition,
+          end: stickPosition,
           endTrigger: nextCard,
           pin: true,
           pinSpacing: false,
         });
-        triggers.push(pinTrigger);
-      }
 
-      // While the next card approaches from below, shrink & fade the
-      // current (pinned) card so the next one visibly reveals over it.
-      if (!isLast) {
-        const tween = gsap.to(card, {
+        gsap.to(card, {
           scale: 0.92,
           opacity: 0.35,
           ease: "none",
           scrollTrigger: {
             trigger: nextCard,
             start: "top bottom",
-            end: STICK_POS,
+            end: stickPosition,
             scrub: true,
           },
         });
-        if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
-      }
+      });
     });
 
     ScrollTrigger.refresh();
 
-    return () => {
-      triggers.forEach((t) => t.kill());
-    };
+    return () => ctx.revert();
   }, []);
 
   return (

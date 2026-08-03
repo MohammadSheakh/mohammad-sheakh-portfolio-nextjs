@@ -1,17 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 export default function CircleCTA() {
   const sectionRef = useRef<HTMLElement>(null);
   const ringsRef = useRef<HTMLDivElement>(null);
-  const circleRef = useRef<HTMLDivElement>(null);
+  const circleRef = useRef<HTMLButtonElement>(null);
   const cbTextRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -19,11 +20,12 @@ export default function CircleCTA() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=120%",
-          scrub: 1,
+          end: "+=170%",
+          scrub: 1.2,
           pin: true,
         },
       });
+      scrollTriggerRef.current = tl.scrollTrigger ?? null;
 
       tl.to(ringsRef.current, { opacity: 0, ease: "none" }, 0)
         .to(circleRef.current, { scale: 28, ease: "none" }, 0)
@@ -31,8 +33,25 @@ export default function CircleCTA() {
         .to(overlayRef.current, { opacity: 1, ease: "none" }, 0.55);
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      scrollTriggerRef.current = null;
+      ctx.revert();
+    };
   }, []);
+
+  const handleCircleClick = () => {
+    const trigger = scrollTriggerRef.current;
+    if (!trigger) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    window.scrollTo({
+      top: trigger.end,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  };
 
   return (
     <section
@@ -45,9 +64,13 @@ export default function CircleCTA() {
         <div className="absolute left-1/2 top-1/2 -ml-[220px] -mt-[220px] h-[440px] w-[440px] animate-ring rounded-full border border-purple/15 [animation-delay:1s]"></div>
         <div className="absolute left-1/2 top-1/2 -ml-[290px] -mt-[290px] h-[580px] w-[580px] animate-ring rounded-full border border-purple/15 [animation-delay:2s]"></div>
       </div>
-      <div
-        className="relative z-[2] flex h-60 w-60 flex-col items-center justify-center gap-1 rounded-full border-0 bg-[#0f766e] will-change-transform"
+      <button
+        className="relative z-[2] flex h-60 w-60 flex-col items-center justify-center gap-1 rounded-full border-0 bg-[#0f766e] will-change-transform transition-shadow focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-teal/40 focus-visible:ring-offset-4"
         ref={circleRef}
+        type="button"
+        aria-label="Open contact invitation"
+        title="Let's work together"
+        onClick={handleCircleClick}
       >
         <div
           className="pointer-events-none text-center font-display text-[1.1rem] font-black uppercase tracking-[3px] text-white"
@@ -57,7 +80,7 @@ export default function CircleCTA() {
           <br />
           WORK
         </div>
-      </div>
+      </button>
       <div
         className="pointer-events-none fixed inset-0 z-[901] flex flex-col items-center justify-center text-center text-white opacity-0"
         ref={overlayRef}
