@@ -77,23 +77,22 @@ const CARDS = [
 export default function Carousel() {
   const [active, setActive] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
-  const drag = useRef({ dragging: false, startX: 0, scrollLeft: 0 });
 
-  const onMouseDown = (e: React.MouseEvent) => {
+  const selectCard = (index: number) => {
     const track = trackRef.current;
     if (!track) return;
-    drag.current.dragging = true;
-    drag.current.startX = e.pageX - track.offsetLeft;
-    drag.current.scrollLeft = track.scrollLeft;
+
+    const nextIndex = Math.min(Math.max(index, 0), CARDS.length - 1);
+
+    setActive(nextIndex);
+    track.scrollTo({
+      left: nextIndex * 324,
+      behavior: "smooth",
+    });
   };
-  const onMouseLeave = () => (drag.current.dragging = false);
-  const onMouseUp = () => (drag.current.dragging = false);
-  const onMouseMove = (e: React.MouseEvent) => {
-    const track = trackRef.current;
-    if (!track || !drag.current.dragging) return;
-    e.preventDefault();
-    const x = e.pageX - track.offsetLeft - drag.current.startX;
-    track.scrollLeft = drag.current.scrollLeft - x * 2;
+
+  const moveCarousel = (direction: -1 | 1) => {
+    selectCard(active + direction);
   };
 
   return (
@@ -107,20 +106,20 @@ export default function Carousel() {
         </h2>
       </div>
       <div
-        className="flex cursor-none snap-x snap-mandatory gap-6 overflow-x-auto px-6 select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:px-12"
+        className="flex gap-6 overflow-x-hidden px-6 select-none md:px-12"
         ref={trackRef}
-        onMouseDown={onMouseDown}
-        onMouseLeave={onMouseLeave}
-        onMouseUp={onMouseUp}
-        onMouseMove={onMouseMove}
       >
         {CARDS.map((c, i) => (
-          <div
-            className={`relative min-h-[400px] shrink-0 cursor-none snap-start overflow-hidden rounded-3xl transition-[flex-basis] duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              active === i ? "basis-[520px]" : "basis-[300px]"
+          <button
+            type="button"
+            aria-pressed={active === i}
+            className={`relative min-h-[400px] shrink-0 cursor-pointer overflow-hidden rounded-3xl border-0 p-0 text-left transition-[flex-basis,box-shadow] duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple/70 ${
+              active === i
+                ? "basis-[520px] ring-2 ring-purple/70"
+                : "basis-[300px] ring-0"
             }`}
             style={{ background: c.bg }}
-            onClick={() => setActive(i)}
+            onClick={() => selectCard(i)}
             key={c.title}
           >
             <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] [&_svg]:h-[200px] [&_svg]:w-[200px]">
@@ -145,16 +144,81 @@ export default function Carousel() {
                   active === i ? "max-h-[60px] opacity-100 delay-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <a
+                <span
                   className="inline-flex items-center rounded-full border border-white/60 px-5 py-2 text-xs font-semibold tracking-wide text-white transition-colors duration-300 hover:bg-white hover:text-black"
-                  href="#"
                 >
                   <span>Explore →</span>
-                </a>
+                </span>
               </div>
             </div>
-          </div>
+          </button>
         ))}
+      </div>
+
+      <div className="mt-10 flex items-center justify-between gap-8 px-6 md:px-12">
+        <div className="flex min-w-0 flex-1 items-center gap-3 md:max-w-sm">
+          <span className="font-mono text-xs font-bold text-[#0a0a0a]">
+            {String(active + 1).padStart(2, "0")}
+          </span>
+          <div className="relative h-px flex-1 overflow-hidden bg-black/15">
+            <div
+              className="absolute inset-y-0 left-0 bg-purple transition-[width] duration-500"
+              style={{ width: `${((active + 1) / CARDS.length) * 100}%` }}
+            />
+          </div>
+          <span className="font-mono text-xs font-bold text-[#0a0a0a]">
+            {String(CARDS.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        <div className="mr-[10%] flex items-center gap-3">
+          <button
+            type="button"
+            aria-label="Previous expertise"
+            title="Previous expertise"
+            disabled={active === 0}
+            onClick={() => moveCarousel(-1)}
+            className="flex h-[52px] w-[52px] items-center justify-center rounded-full border border-black/70 text-[#0a0a0a] transition-all duration-300 hover:bg-[#0a0a0a] hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-[#0a0a0a]"
+          >
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m15 18-6-6 6-6" />
+              <path d="M9 12h10" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label="Next expertise"
+            title="Next expertise"
+            disabled={active === CARDS.length - 1}
+            onClick={() => moveCarousel(1)}
+            className="flex h-[52px] w-[52px] items-center justify-center rounded-full border border-black/70 text-[#0a0a0a] transition-all duration-300 hover:bg-[#0a0a0a] hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-[#0a0a0a]"
+          >
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m9 18 6-6-6-6" />
+              <path d="M5 12h10" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
