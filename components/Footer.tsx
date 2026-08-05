@@ -1,6 +1,7 @@
 export default function Footer() {
   return (
     <footer className="mx-8 mt-8 rounded-[28px] bg-[#111] p-6 md:p-14">
+      {/* Identity, navigation, and contact columns. */}
       <div className="mb-6 grid grid-cols-1 gap-12 border-b border-[#222] pb-10 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
           <div className="mb-3 font-display text-sm font-black uppercase tracking-[2px] text-white">
@@ -96,16 +97,17 @@ export default function Footer() {
         <span>© 2026 Mohammad Sheakh</span>
         <span>Backend Developer · Dhaka, Bangladesh</span>
       </div>
+      {/* Oversized signature is cropped and blurred into the footer baseline. */}
       <div className="relative -mx-6 -mb-6 mt-8 h-[clamp(5.5rem,11.5vw,12rem)] overflow-hidden bg-[#111] text-center md:-mx-14 md:-mb-14 md:mt-12">
         <div
-          className="absolute inset-x-0 -bottom-[0.12em] whitespace-nowrap text-[clamp(4.6rem,10.8vw,12rem)] font-light leading-[0.82] tracking-[-0.08em] text-white"
+          className="absolute inset-x-0 -bottom-[0.12em] whitespace-nowrap text-[clamp(4.6rem,10.8vw,12rem)] font-semibold leading-[0.82] tracking-[-0.08em] text-white"
           style={{
             fontFamily: "var(--font-space-grotesk), Arial, sans-serif",
           }}
         >
           mohammad sheakh
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[28%] bg-gradient-to-b from-transparent to-[#111]/25 backdrop-blur-[3px] [mask-image:linear-gradient(to_bottom,transparent,black)]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[18%] bg-gradient-to-b from-transparent to-[#111]/25 backdrop-blur-[3px] [mask-image:linear-gradient(to_bottom,transparent,black)]" />
       </div>
     </footer>
   );

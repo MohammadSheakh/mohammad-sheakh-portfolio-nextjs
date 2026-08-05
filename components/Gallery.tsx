@@ -9,6 +9,7 @@ export default function Gallery() {
         <br />
         Ship.
       </h2>
+      {/* Offset process cards form a responsive editorial gallery. */}
       <div className="mt-16 flex flex-wrap items-center justify-center gap-6">
         <div className="relative mt-[70px] h-[300px] w-[230px] shrink-0 overflow-hidden rounded-3xl bg-[var(--purple-pale)]">
           <div className="relative flex h-full w-full flex-col items-center justify-center bg-[var(--purple-pale)] p-8 text-center">

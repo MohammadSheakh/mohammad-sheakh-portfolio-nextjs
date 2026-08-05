@@ -29,6 +29,7 @@ export default function Deck() {
   const touchStart = useRef({ x: 0, y: 0 });
   const suppressTap = useRef(false);
 
+  // Cycle the mobile stack continuously in either direction.
   const moveMobileCarousel = (direction: -1 | 1) => {
     setMobileActive(
       (current) => (current + direction + CARDS.length) % CARDS.length,
@@ -40,6 +41,7 @@ export default function Deck() {
     touchStart.current = { x: touch.clientX, y: touch.clientY };
   };
 
+  // Treat only deliberate horizontal gestures as carousel swipes.
   const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
     const touch = event.changedTouches[0];
     const distanceX = touch.clientX - touchStart.current.x;
@@ -64,6 +66,7 @@ export default function Deck() {
       <h2 className="s-title text-center font-display text-[clamp(2.75rem,4.6vw,3.75rem)] font-black leading-none tracking-[-3px] max-md:text-[clamp(2.3rem,11vw,3.25rem)] max-md:tracking-[-2px]">
         What makes me different
       </h2>
+      {/* Desktop and tablet use the hover/focus card-spread interaction. */}
       <div className="relative mt-24 hidden h-[432px] items-center justify-center md:flex">
         <div
           className={`absolute flex h-[432px] w-[min(30.65vw,384px)] flex-col items-center justify-center rounded-[28px] border border-[var(--border)] bg-[var(--surface)] px-10 py-12 text-center opacity-100 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] will-change-transform ${
@@ -112,6 +115,7 @@ export default function Deck() {
         </div>
       </div>
 
+      {/* Mobile uses a tap-and-swipe layered card carousel. */}
       <div
         className="relative mx-auto mt-12 h-[410px] w-[min(82vw,340px)] touch-pan-y md:hidden"
         onTouchStart={handleTouchStart}

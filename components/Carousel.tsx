@@ -78,6 +78,7 @@ export default function Carousel() {
   const [active, setActive] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // Select, expand, and align one expertise card inside the hidden scroll track.
   const selectCard = (index: number) => {
     const track = trackRef.current;
     if (!track) return;
@@ -109,6 +110,7 @@ export default function Carousel() {
         className="flex gap-6 overflow-x-hidden px-6 select-none md:px-12"
         ref={trackRef}
       >
+        {/* Selectable expertise cards expand to reveal their supporting details. */}
         {CARDS.map((c, i) => (
           <button
             type="button"
@@ -155,6 +157,7 @@ export default function Carousel() {
         ))}
       </div>
 
+      {/* Progress and button-only carousel navigation. */}
       <div className="mt-10 flex items-center justify-between gap-8 px-6 md:px-12">
         <div className="flex min-w-0 flex-1 items-center gap-3 md:max-w-sm">
           <span className="font-mono text-xs font-bold text-[#0a0a0a]">

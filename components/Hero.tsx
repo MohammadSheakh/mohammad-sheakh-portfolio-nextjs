@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 
 export default function Hero() {
@@ -53,6 +54,15 @@ export default function Hero() {
       ease: "power3.out",
       clearProps: "opacity,transform",
     });
+    gsap.from(".hero-portrait", {
+      duration: 1.4,
+      x: 80,
+      scale: 0.96,
+      opacity: 0,
+      delay: 0.35,
+      ease: "power4.out",
+      clearProps: "opacity,transform",
+    });
   }, []);
 
   return (
@@ -60,6 +70,19 @@ export default function Hero() {
       {/* Decorative Circles */}
       <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-white/30 blur-3xl pointer-events-none"></div>
       <div className="absolute top-1/2 -right-32 w-[500px] h-[500px] rounded-full bg-purple-500/20 blur-3xl pointer-events-none"></div>
+
+      <div className="hero-portrait pointer-events-none absolute right-[6%] top-1/2 z-[2] h-[300px] w-[300px] -translate-y-1/2 overflow-hidden rounded-full border border-white/35 bg-white/15 opacity-95 shadow-[0_30px_90px_rgba(32,20,95,0.35)] backdrop-blur-sm max-md:right-[-12%] max-md:top-[58%] max-md:opacity-60">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_70%)]" />
+        <Image
+          src="/mohammad-sheakh-portrait-cutout.png"
+          alt="Portrait of Mohammad Sheakh"
+          fill
+          priority
+          sizes="300px"
+          className="scale-[1.05] object-cover object-[center_28%]"
+          style={{ filter: "saturate(0.92) contrast(1.02)" }}
+        />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         {/* Status Badge */}
@@ -107,5 +130,3 @@ export default function Hero() {
     </section>
   );
 }
-
-

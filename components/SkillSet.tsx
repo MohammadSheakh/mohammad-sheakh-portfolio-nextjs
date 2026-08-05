@@ -35,6 +35,7 @@ export default function SkillSet() {
           Language and framework I have been working on
         </h2>
 
+        {/* Data-driven groups keep skill labels and badges easy to extend. */}
         <div className="space-y-9">
           {SKILL_GROUPS.map((group) => (
             <div key={group.title}>

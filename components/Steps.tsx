@@ -31,6 +31,7 @@ export default function Steps() {
         <h2 className="mb-12 text-center font-display text-[clamp(2rem,4vw,3rem)] font-black tracking-[-1.5px]">
           How I build things.
         </h2>
+        {/* Four delivery stages collapse into a two-column mobile grid. */}
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {STEPS.map((s) => (
             <div key={s.n}>

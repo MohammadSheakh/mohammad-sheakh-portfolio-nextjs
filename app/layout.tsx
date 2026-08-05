@@ -37,6 +37,7 @@ export const metadata: Metadata = {
     "Backend developer building scalable APIs, real-time engines, and job queues. Node.js · NestJS · TypeScript. Based in Dhaka, Bangladesh.",
 };
 
+// Apply the saved theme before hydration to prevent a light/dark flash.
 const themeInitScript = `
 (function () {
   try {
@@ -77,4 +78,3 @@ export default function RootLayout({
     </html>
   );
 }
-

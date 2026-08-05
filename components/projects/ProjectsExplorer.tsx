@@ -17,6 +17,7 @@ export default function ProjectsExplorer() {
 
   const closeModal = useCallback(() => setModalOpen(false), []);
 
+  // Prefer backend projects when configured, with seed data as an offline fallback.
   useEffect(() => {
     let active = true;
 
@@ -48,6 +49,7 @@ export default function ProjectsExplorer() {
     };
   }, []);
 
+  // Resolve admin access independently so public browsing never waits on auth.
   useEffect(() => {
     let active = true;
 
@@ -92,6 +94,7 @@ export default function ProjectsExplorer() {
     [projects],
   );
 
+  // Apply category and free-text filters in one pass over the project collection.
   const filteredProjects = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return projects.filter((project) => {
@@ -124,6 +127,7 @@ export default function ProjectsExplorer() {
   return (
     <main className="min-h-screen bg-PrimaryColorDark px-6 pb-24 pt-36 text-slate-200 md:px-12">
       <div className="mx-auto max-w-7xl">
+        {/* Archive introduction and project discovery controls. */}
         <header className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <div className="mb-3 text-[0.68rem] font-bold uppercase tracking-[3px] text-cyan-300">
@@ -209,6 +213,7 @@ export default function ProjectsExplorer() {
           </p>
         )}
 
+        {/* Admin creation entry and the filtered project card grid. */}
         <section className="mt-8 grid gap-7 md:grid-cols-2">
           <button
             className="group flex min-h-[430px] flex-col items-center justify-center rounded-[28px] border-2 border-dashed border-cyan-300/40 bg-cyan-300/[0.04] p-8 text-center transition-all hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-300/[0.08]"

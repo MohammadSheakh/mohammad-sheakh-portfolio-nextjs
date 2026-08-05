@@ -33,10 +33,12 @@ export default function WaveCanvas({
       vy: (Math.random() - 0.5) * 0.6,
     }));
 
-    let raf: number;
+    let raf = 0;
+    let isVisible = false;
+    let isRunning = false;
 
     function frame() {
-      if (!ctx) return;
+      if (!ctx || !isRunning) return;
       ctx.clearRect(0, 0, W, H);
       // Waves
       for (let j = 0; j < 3; j++) {
@@ -83,12 +85,50 @@ export default function WaveCanvas({
       t += 0.03;
       raf = requestAnimationFrame(frame);
     }
-    frame();
 
-    return () => cancelAnimationFrame(raf);
+    const start = () => {
+      if (isRunning || !isVisible || document.hidden) return;
+      isRunning = true;
+      raf = requestAnimationFrame(frame);
+    };
+
+    const stop = () => {
+      isRunning = false;
+      cancelAnimationFrame(raf);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+
+    // Pause the canvas outside the viewport to avoid competing with scroll animation.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) start();
+        else stop();
+      },
+      { rootMargin: "160px 0px" },
+    );
+
+    observer.observe(c);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      stop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, [color, color2]);
 
   return (
-    <canvas className="block" ref={canvasRef} width={width} height={height} />
+    <canvas
+      className="block"
+      ref={canvasRef}
+      width={width}
+      height={height}
+      aria-hidden="true"
+    />
   );
 }

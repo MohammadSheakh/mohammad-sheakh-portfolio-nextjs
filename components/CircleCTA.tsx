@@ -12,6 +12,7 @@ export default function CircleCTA() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
+  // Pin the CTA while the circle expands into the full-screen contact overlay.
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +40,7 @@ export default function CircleCTA() {
     };
   }, []);
 
+  // Clicking the circle completes the same timeline normally driven by scrolling.
   const handleCircleClick = () => {
     const trigger = scrollTriggerRef.current;
     if (!trigger) return;
@@ -59,6 +61,7 @@ export default function CircleCTA() {
       id="contact"
       ref={sectionRef}
     >
+      {/* Decorative rings collapse as the central CTA expands. */}
       <div ref={ringsRef}>
         <div className="absolute left-1/2 top-1/2 -ml-[150px] -mt-[150px] h-[300px] w-[300px] animate-ring rounded-full border border-purple/15"></div>
         <div className="absolute left-1/2 top-1/2 -ml-[220px] -mt-[220px] h-[440px] w-[440px] animate-ring rounded-full border border-purple/15 [animation-delay:1s]"></div>
@@ -81,6 +84,7 @@ export default function CircleCTA() {
           WORK
         </div>
       </button>
+      {/* Fixed invitation appears after the expanding circle covers the viewport. */}
       <div
         className="pointer-events-none fixed inset-0 z-[901] flex flex-col items-center justify-center text-center text-white opacity-0"
         ref={overlayRef}

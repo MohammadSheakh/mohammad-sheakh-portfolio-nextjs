@@ -8,6 +8,7 @@ export default function ScrollToTop() {
   const buttonClassName =
     "flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white/90 text-neutral-950 shadow-[0_10px_35px_rgba(0,0,0,0.15)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-neutral-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple focus-visible:ring-offset-2 dark:border-white/15 dark:bg-neutral-900/90 dark:text-white dark:hover:bg-white dark:hover:text-neutral-950";
 
+  // Show navigation after the hero and hide downward actions at the footer.
   useEffect(() => {
     const footer = document.querySelector<HTMLElement>("footer");
     const handleScroll = () => {
@@ -31,6 +32,7 @@ export default function ScrollToTop() {
     };
   }, []);
 
+  // Find the next semantic section currently below the fixed navigation.
   const scrollToNextSection = () => {
     const nextSection = Array.from(
       document.querySelectorAll<HTMLElement>("section"),
@@ -84,6 +86,7 @@ export default function ScrollToTop() {
         </svg>
       </button>
 
+      {/* Downward controls disappear when no further content remains. */}
       {!atBottom && (
         <>
           <button

@@ -47,11 +47,18 @@ const PROJECTS = [
 export default function StackCards() {
   const wrapRef = useRef<HTMLDivElement>(null);
 
+  // Pin each project until the following card arrives, then fade it into depth.
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray<HTMLDivElement>(".sc");
       const stickPosition = "top 100px";
+
+      gsap.set(cards, {
+        force3D: true,
+        transformOrigin: "center center",
+        backfaceVisibility: "hidden",
+      });
 
       cards.forEach((card, index) => {
         const nextCard = cards[index + 1];
@@ -64,25 +71,34 @@ export default function StackCards() {
           endTrigger: nextCard,
           pin: true,
           pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
         });
 
         gsap.to(card, {
-          scale: 0.92,
-          opacity: 0.35,
+          scale: 0.9,
+          autoAlpha: 0,
           ease: "none",
+          overwrite: "auto",
           scrollTrigger: {
             trigger: nextCard,
             start: "top bottom",
             end: stickPosition,
-            scrub: true,
+            scrub: 0.65,
+            invalidateOnRefresh: true,
           },
         });
       });
     });
 
-    ScrollTrigger.refresh();
+    const refreshFrame = window.requestAnimationFrame(() =>
+      ScrollTrigger.refresh(),
+    );
 
-    return () => ctx.revert();
+    return () => {
+      window.cancelAnimationFrame(refreshFrame);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -96,10 +112,11 @@ export default function StackCards() {
         </h2>
       </div>
 
+      {/* Project wrappers control the distance between each pinned card. */}
       <div className="relative" ref={wrapRef}>
         {PROJECTS.map((p, i) => (
           <div
-            className="stack-card-outer flex min-h-screen items-center py-5"
+            className="stack-card-outer flex min-h-[68vh] items-center py-3"
             style={{ zIndex: i + 1 }}
             key={p.title}
           >

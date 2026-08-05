@@ -5,6 +5,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 export default function SectionTitleReveal() {
+  // Register one reveal trigger for every shared section-title marker.
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const triggers: ScrollTrigger[] = [];
@@ -26,4 +27,3 @@ export default function SectionTitleReveal() {
 
   return null;
 }
-

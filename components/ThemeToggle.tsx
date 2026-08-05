@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
+  // Read the pre-hydration theme applied by the root layout.
   useEffect(() => {
     const current = document.documentElement.getAttribute("data-theme");
     setTheme(current === "dark" ? "dark" : "light");
   }, []);
 
+  // Persist the selected theme and update CSS variables through the root attribute.
   const toggle = () => {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);

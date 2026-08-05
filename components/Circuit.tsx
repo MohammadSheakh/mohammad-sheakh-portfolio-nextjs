@@ -78,6 +78,7 @@ function CircuitSvg() {
 export default function Circuit() {
   return (
     <div className="relative h-[130px] overflow-hidden bg-[#0a0a0a]">
+      {/* Two identical SVG strips create the continuous circuit animation. */}
       <div className="absolute left-0 top-0 h-full animate-circuit whitespace-nowrap">
         <CircuitSvg />
         <CircuitSvg />

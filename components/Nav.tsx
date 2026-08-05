@@ -51,9 +51,9 @@ export default function Nav() {
       >
         {/* Nav Links Group */}
         <div
-          className={`flex items-center gap-7 whitespace-nowrap transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`flex items-center gap-5 whitespace-nowrap transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:gap-7 ${
             isNavVisible
-              ? "max-w-[500px] opacity-100 translate-x-0 mr-5 visible"
+              ? "max-w-[780px] opacity-100 translate-x-0 mr-5 visible"
               : "max-w-0 opacity-0 translate-x-5 mr-0 overflow-hidden pointer-events-none"
           }`}
         >
@@ -68,6 +68,18 @@ export default function Nav() {
             className="text-[0.78rem] tracking-[1.5px] uppercase font-semibold text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors"
           >
             Projects
+          </Link>
+          <Link
+            href="/timeline"
+            className="text-[0.78rem] tracking-[1.5px] uppercase font-semibold text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors"
+          >
+            Timeline
+          </Link>
+          <Link
+            href="/articles"
+            className="text-[0.78rem] tracking-[1.5px] uppercase font-semibold text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors"
+          >
+            Articles
           </Link>
           <Link
             href="/#skills"

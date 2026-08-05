@@ -94,6 +94,7 @@ export default function AddProjectModal({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
+  // Lock background scrolling and provide keyboard dismissal while the modal is open.
   useEffect(() => {
     if (!open) return;
 
@@ -145,6 +146,7 @@ export default function AddProjectModal({
     setSubmitting(true);
     setError("");
 
+    // Keep field names aligned with the planned multipart backend endpoint.
     const requestBody = new FormData();
     requestBody.append("projectTitle", form.title);
     requestBody.append("projectDescription", form.description);
@@ -178,6 +180,7 @@ export default function AddProjectModal({
       if (member.image) requestBody.append("memberImages", member.image);
     });
 
+    // Build an immediate local representation so the new card appears without refetching.
     const localProject: Project = {
       id: crypto.randomUUID(),
       title: form.title,

@@ -96,6 +96,7 @@ export default function Feedback() {
     }));
   };
 
+  // Anonymous and extended-information modes are intentionally mutually exclusive.
   const handleAnonymousChange = (checked: boolean) => {
     setAnonymous(checked);
     if (checked) setMoreInformation(false);
@@ -106,6 +107,7 @@ export default function Feedback() {
     if (checked) setAnonymous(false);
   };
 
+  // Normalize optional identity fields before posting to the future feedback API.
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitState("submitting");
@@ -164,6 +166,7 @@ export default function Feedback() {
           Share your thoughts and creative ideas with me
         </h2>
 
+        {/* Feedback identity mode controls which optional fields are displayed. */}
         <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
           <label className="flex cursor-pointer items-center gap-3 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold transition-colors hover:bg-white/10">
             <input

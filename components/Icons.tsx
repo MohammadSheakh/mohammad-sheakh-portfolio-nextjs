@@ -118,6 +118,7 @@ export default function Icons() {
   const gridRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
+  // Start the staggered icon reveal once and stop observing afterward.
   useEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -148,6 +149,7 @@ export default function Icons() {
         <br />
         ship products.
       </h2>
+      {/* Staggered technology tiles reveal in their data order. */}
       <div className="mt-16 grid grid-cols-4 gap-6 md:grid-cols-8" ref={gridRef}>
         {ICONS.map((icon, index) => (
           <div className="text-center" key={icon.name}>

@@ -34,6 +34,7 @@ export default function Testimonials() {
           Trusted by clients.
         </h2>
 
+        {/* Each testimonial pairs the client quote with ratings and highlights. */}
         <div className="grid gap-6">
           {TESTIMONIALS.map((testimonial) => (
             <article

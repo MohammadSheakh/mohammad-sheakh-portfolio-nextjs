@@ -6,6 +6,7 @@ export default function Cursor() {
   const curRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
+  // Track the pointer directly while easing the outer ring behind it.
   useEffect(() => {
     const cur = curRef.current;
     const ring = ringRef.current;

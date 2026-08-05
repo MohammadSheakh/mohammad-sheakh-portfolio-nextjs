@@ -31,6 +31,7 @@ export interface Project {
   };
 }
 
+// Seed projects keep the archive useful before the projects API is connected.
 export const INITIAL_PROJECTS: Project[] = [
   {
     id: "alora-rental",

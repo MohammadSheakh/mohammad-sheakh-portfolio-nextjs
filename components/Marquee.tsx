@@ -17,6 +17,7 @@ const TECHS = [
 ];
 
 export default function Marquee() {
+  // Duplicate the list to create a seamless CSS marquee loop.
   const items = [...TECHS, ...TECHS];
   return (
     <div className="overflow-hidden border-y border-[var(--border)] bg-[var(--surface)] py-[0.85rem]">
