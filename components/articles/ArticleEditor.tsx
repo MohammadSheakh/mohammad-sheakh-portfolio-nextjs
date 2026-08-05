@@ -20,7 +20,7 @@ interface ArticleEditorProps {
 }
 
 const fieldClassName =
-  "mt-2 w-full rounded-xl border border-slate-500/70 bg-slate-700 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20";
+  "mt-2 w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] outline-none placeholder:text-[var(--muted)] focus:border-purple focus:ring-2 focus:ring-purple/20";
 
 export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
   const [article, setArticle] = useState<Article | null>(null);
@@ -81,7 +81,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
 
   if (adminState === "checking" || !loaded) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-PrimaryColorDark text-slate-300">
+      <main className="flex min-h-screen items-center justify-center bg-[var(--bg)] text-[var(--muted)]">
         Loading article workspace...
       </main>
     );
@@ -89,13 +89,13 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
 
   if (adminState !== "admin") {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-PrimaryColorDark px-6 text-center text-slate-300">
+      <main className="flex min-h-screen items-center justify-center bg-[var(--bg)] px-6 text-center text-[var(--muted)]">
         <div>
-          <h1 className="font-display text-4xl font-black text-white">Admin access required.</h1>
-          <p className="mt-4 text-sm text-slate-400">
+          <h1 className="font-display text-4xl font-black text-[var(--text)]">Admin access required.</h1>
+          <p className="mt-4 text-sm text-[var(--muted)]">
             Sign in as an administrator to create or edit articles.
           </p>
-          <Link className="mt-6 inline-flex text-cyan-300 hover:underline" href="/articles">
+          <Link className="mt-6 inline-flex text-purple hover:underline dark:text-purple-light" href="/articles">
             ← Return to articles
           </Link>
         </div>
@@ -105,10 +105,10 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
 
   if (!article) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-PrimaryColorDark px-6 text-center text-slate-300">
+      <main className="flex min-h-screen items-center justify-center bg-[var(--bg)] px-6 text-center text-[var(--muted)]">
         <div>
-          <h1 className="font-display text-4xl font-black text-white">Article not found.</h1>
-          <Link className="mt-6 inline-flex text-cyan-300 hover:underline" href="/articles">
+          <h1 className="font-display text-4xl font-black text-[var(--text)]">Article not found.</h1>
+          <Link className="mt-6 inline-flex text-purple hover:underline dark:text-purple-light" href="/articles">
             ← Return to articles
           </Link>
         </div>
@@ -286,27 +286,27 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
   };
 
   return (
-    <main className="min-h-screen bg-PrimaryColorDark px-5 pb-24 pt-32 text-slate-200 md:px-12">
+    <main className="min-h-screen bg-[var(--bg)] px-5 pb-24 pt-32 text-[var(--text)] md:px-12">
       <form className="mx-auto max-w-6xl" onSubmit={handleSubmit}>
         {/* Article-level metadata and primary save actions. */}
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-[0.68rem] font-bold uppercase tracking-[3px] text-cyan-300">
+            <div className="text-[0.68rem] font-bold uppercase tracking-[3px] text-purple dark:text-purple-light">
               {articleSlug ? "Edit article" : "Create article"}
             </div>
-            <h1 className="mt-3 font-display text-[clamp(2.8rem,6vw,5rem)] font-black leading-none text-white">
+            <h1 className="mt-3 font-display text-[clamp(2.8rem,6vw,5rem)] font-black leading-none text-[var(--text)]">
               Article workspace.
             </h1>
           </div>
           <div className="flex gap-3">
             <Link
-              className="rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-slate-300"
+              className="rounded-xl border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--muted)] hover:text-[var(--text)]"
               href={articleSlug ? `/articles/${articleSlug}` : "/articles"}
             >
               Cancel
             </Link>
             <button
-              className="rounded-xl bg-cyan-300 px-6 py-3 text-sm font-bold text-slate-950 disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-xl bg-[var(--text)] px-6 py-3 text-sm font-bold text-[var(--bg)] disabled:cursor-not-allowed disabled:opacity-40"
               type="submit"
               disabled={saving}
             >
@@ -315,9 +315,9 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
           </div>
         </div>
 
-        <section className="mt-10 rounded-[28px] border border-white/15 bg-white/[0.05] p-6 md:p-8">
+        <section className="mt-10 rounded-[28px] border border-[var(--border)] bg-[var(--surface)] p-6 md:p-8">
           <div className="grid gap-6 md:grid-cols-2">
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-[var(--muted)]">
               Article title
               <input
                 className={fieldClassName}
@@ -330,7 +330,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                 }}
               />
             </label>
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-[var(--muted)]">
               URL slug
               <input
                 className={fieldClassName}
@@ -340,7 +340,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                 onChange={(event) => updateArticle("slug", slugify(event.target.value))}
               />
             </label>
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-[var(--muted)]">
               Category
               <input
                 className={fieldClassName}
@@ -351,8 +351,8 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                 onChange={(event) => updateArticle("category", event.target.value)}
               />
             </label>
-            <label className="text-sm text-slate-300">
-              Tags <span className="text-slate-500">(comma separated)</span>
+            <label className="text-sm text-[var(--muted)]">
+              Tags <span className="opacity-70">(comma separated)</span>
               <input
                 className={fieldClassName}
                 type="text"
@@ -362,7 +362,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
               />
             </label>
           </div>
-          <label className="mt-6 block text-sm text-slate-300">
+          <label className="mt-6 block text-sm text-[var(--muted)]">
             Article excerpt
             <textarea
               className={`${fieldClassName} min-h-28 resize-y`}
@@ -375,13 +375,13 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
 
         <div className="mt-10 flex items-center justify-between gap-4">
           <div>
-            <h2 className="font-display text-3xl font-black text-white">Pages and subpages</h2>
-            <p className="mt-2 text-sm text-slate-400">
+            <h2 className="font-display text-3xl font-black text-[var(--text)]">Pages and subpages</h2>
+            <p className="mt-2 text-sm text-[var(--muted)]">
               Build the article like a small book with nested navigation.
             </p>
           </div>
           <button
-            className="shrink-0 rounded-xl border border-cyan-300/60 px-5 py-3 text-xs font-bold uppercase tracking-[1px] text-cyan-200 hover:bg-cyan-300 hover:text-slate-950"
+            className="shrink-0 rounded-xl border border-purple/50 px-5 py-3 text-xs font-bold uppercase tracking-[1px] text-purple hover:bg-[var(--purple-pale)] dark:text-purple-light"
             type="button"
             onClick={addPage}
           >
@@ -393,15 +393,15 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
         <div className="mt-6 space-y-8">
           {article.pages.map((page, pageIndex) => (
             <section
-              className="rounded-[28px] border border-white/15 bg-slate-800/80 p-5 md:p-7"
+              className="rounded-[28px] border border-[var(--border)] bg-[var(--surface)] p-5 md:p-7"
               key={page.id}
             >
               <div className="flex items-center justify-between gap-4">
-                <span className="font-mono text-xs font-bold text-cyan-300">
+                <span className="font-mono text-xs font-bold text-purple dark:text-purple-light">
                   PAGE {String(pageIndex + 1).padStart(2, "0")}
                 </span>
                 <button
-                  className="text-xs font-semibold text-rose-300 hover:text-rose-200"
+                  className="text-xs font-semibold text-rose-600 hover:text-rose-500 dark:text-rose-300 dark:hover:text-rose-200"
                   type="button"
                   onClick={() => removePage(pageIndex)}
                 >
@@ -409,7 +409,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                 </button>
               </div>
               <div className="mt-5 grid gap-5 md:grid-cols-2">
-                <label className="text-sm text-slate-300">
+                <label className="text-sm text-[var(--muted)]">
                   Page title
                   <input
                     className={fieldClassName}
@@ -422,7 +422,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                     }}
                   />
                 </label>
-                <label className="text-sm text-slate-300">
+                <label className="text-sm text-[var(--muted)]">
                   Page slug
                   <input
                     className={fieldClassName}
@@ -435,9 +435,9 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                   />
                 </label>
               </div>
-              <label className="mt-5 flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] p-4 text-sm text-slate-300">
+              <label className="mt-5 flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg)] p-4 text-sm text-[var(--muted)]">
                 <input
-                  className="mt-0.5 size-4 accent-cyan-300"
+                  className="mt-0.5 size-4 accent-purple"
                   type="checkbox"
                   checked={Boolean(page.isIndex)}
                   onChange={(event) =>
@@ -445,7 +445,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                   }
                 />
                 <span>
-                  <strong className="block text-white">Use as a section index</strong>
+                  <strong className="block text-[var(--text)]">Use as a section index</strong>
                   This page organizes subpages and does not need its own document.
                 </span>
               </label>
@@ -459,10 +459,10 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                 </div>
               )}
 
-              <div className="mt-7 flex items-center justify-between gap-4 border-t border-white/10 pt-6">
-                <h3 className="font-display text-xl font-black text-white">Subpages</h3>
+              <div className="mt-7 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-6">
+                <h3 className="font-display text-xl font-black text-[var(--text)]">Subpages</h3>
                 <button
-                  className="rounded-lg border border-white/20 px-4 py-2 text-xs font-semibold text-slate-300 hover:border-cyan-300 hover:text-cyan-200"
+                  className="rounded-lg border border-[var(--border)] px-4 py-2 text-xs font-semibold text-[var(--muted)] hover:border-purple hover:text-purple dark:hover:text-purple-light"
                   type="button"
                   onClick={() => addSubPage(pageIndex)}
                 >
@@ -473,22 +473,22 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
               <div className="mt-5 space-y-5">
                 {page.subPages.map((subPage, subPageIndex) => (
                   <div
-                    className="rounded-2xl border border-white/10 bg-white/[0.04] p-5"
+                    className="rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-5"
                     key={subPage.id}
                   >
                     <div className="flex items-center justify-between gap-4">
-                      <span className="text-xs font-bold uppercase tracking-[1px] text-slate-400">
+                      <span className="text-xs font-bold uppercase tracking-[1px] text-[var(--muted)]">
                         Subpage {subPageIndex + 1}
                       </span>
                       <button
-                        className="text-xs text-rose-300"
+                        className="text-xs text-rose-600 dark:text-rose-300"
                         type="button"
                         onClick={() => removeSubPage(pageIndex, subPageIndex)}
                       >
                         Remove
                       </button>
                     </div>
-                    <label className="mt-4 block text-sm text-slate-300">
+                    <label className="mt-4 block text-sm text-[var(--muted)]">
                       Subpage title
                       <input
                         className={fieldClassName}
@@ -517,7 +517,7 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
                   </div>
                 ))}
                 {page.subPages.length === 0 && (
-                  <p className="rounded-xl border border-dashed border-white/10 py-8 text-center text-sm text-slate-500">
+                  <p className="rounded-xl border border-dashed border-[var(--border)] py-8 text-center text-sm text-[var(--muted)]">
                     No subpages yet.
                   </p>
                 )}
@@ -527,14 +527,14 @@ export default function ArticleEditor({ articleSlug }: ArticleEditorProps) {
         </div>
 
         {error && (
-          <p className="mt-6 rounded-xl border border-rose-300/20 bg-rose-300/10 px-4 py-3 text-sm text-rose-200">
+          <p className="mt-6 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:bg-rose-950/30 dark:text-rose-300">
             {error}
           </p>
         )}
 
         <div className="mt-8 flex justify-end">
           <button
-            className="rounded-xl bg-cyan-300 px-7 py-3.5 text-sm font-bold text-slate-950 disabled:opacity-40"
+            className="rounded-xl bg-[var(--text)] px-7 py-3.5 text-sm font-bold text-[var(--bg)] disabled:opacity-40"
             type="submit"
             disabled={saving}
           >

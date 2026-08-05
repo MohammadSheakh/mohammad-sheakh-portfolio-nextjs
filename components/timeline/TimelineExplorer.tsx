@@ -11,7 +11,7 @@ export default function TimelineExplorer() {
   const [entries, setEntries] = useState<TimelineEntry[]>(INITIAL_TIMELINE);
   const [query, setQuery] = useState("");
   const [selectedYears, setSelectedYears] = useState<number[]>([]);
-  const [adminState, setAdminState] = useState<AdminState>("checking"); //checking 
+  const [adminState, setAdminState] = useState<AdminState>("checking");
   const [modalOpen, setModalOpen] = useState(false);
 
   const closeModal = useCallback(() => setModalOpen(false), []);
@@ -125,20 +125,20 @@ export default function TimelineExplorer() {
   };
 
   return (
-    <main className="min-h-screen bg-PrimaryColorDark px-5 pb-24 pt-36 text-slate-200 md:px-12">
+    <main className="min-h-screen bg-white px-5 pb-24 pt-36 font-sans text-[#111114] md:px-12">
       <div className="mx-auto max-w-7xl">
         {/* Timeline introduction and context. */}
         <header className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-3 text-[0.68rem] font-bold uppercase tracking-[3px] text-cyan-300">
+            <div className="mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[#6e6e73]">
               Personal timeline
             </div>
-            <h1 className="font-display text-[clamp(3rem,7vw,6.5rem)] font-black leading-[0.88] tracking-[-4px] text-white">
+            <h1 className="font-sans text-[clamp(3rem,7vw,6.5rem)] font-semibold leading-[0.9] tracking-[-0.055em] text-[#111114]">
               Progress,
               <br /> documented.
             </h1>
           </div>
-          <p className="max-w-md text-sm leading-7 text-slate-300 lg:text-right">
+          <p className="max-w-md text-sm leading-7 text-[#6e6e73] lg:text-right">
             A living record of the work, learning, and milestones shaping my
             journey as a backend developer.
           </p>
@@ -147,11 +147,11 @@ export default function TimelineExplorer() {
         <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_310px] lg:items-start">
           {/* Search and year filters become a sticky sidebar on large screens. */}
           <div className="lg:order-2 lg:sticky lg:top-28">
-            <div className="rounded-[24px] border border-white/15 bg-white/[0.05] p-5 backdrop-blur-sm">
+            <div className="rounded-[10px] border border-[#e8e8ea] bg-[#fafafa] p-5">
               <label className="relative block">
                 <span className="sr-only">Search timeline</span>
                 <svg
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6e6e73]"
                   width="20"
                   height="20"
                   viewBox="0 0 24 24"
@@ -164,7 +164,7 @@ export default function TimelineExplorer() {
                   <path d="m21 21-4.35-4.35" />
                 </svg>
                 <input
-                  className="w-full rounded-xl border border-slate-500/60 bg-slate-700 py-3.5 pl-12 pr-4 text-sm text-white outline-none placeholder:text-slate-400 focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
+                  className="w-full rounded-[10px] border border-[#e8e8ea] bg-white py-3.5 pl-12 pr-4 text-sm text-[#111114] outline-none placeholder:text-[#8a8a8f] focus:border-[#111114] focus:ring-1 focus:ring-[#111114]"
                   type="search"
                   value={query}
                   placeholder="Search timeline"
@@ -172,13 +172,13 @@ export default function TimelineExplorer() {
                 />
               </label>
 
-              <div className="mt-5 border-t border-white/10 pt-4">
-                <div className="mb-3 flex items-center justify-between text-[0.68rem] font-bold uppercase tracking-[1.5px] text-slate-400">
+              <div className="mt-5 border-t border-[#e8e8ea] pt-4">
+                <div className="mb-3 flex items-center justify-between text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[#6e6e73]">
                   <span>Filter by year</span>
                   {selectedYears.length > 0 && (
                     <button
                       type="button"
-                      className="text-cyan-300 hover:text-cyan-200"
+                      className="text-[#111114] underline-offset-4 hover:underline"
                       onClick={() => setSelectedYears([])}
                     >
                       Clear
@@ -190,19 +190,19 @@ export default function TimelineExplorer() {
                     const count = entries.filter((entry) => entry.year === year).length;
                     return (
                       <label
-                        className="flex cursor-pointer items-center justify-between rounded-xl px-3 py-2.5 transition-colors hover:bg-white/[0.06]"
+                        className="flex cursor-pointer items-center justify-between rounded-[8px] px-3 py-2.5 transition-colors hover:bg-white"
                         key={year}
                       >
                         <span className="flex items-center gap-3">
                           <input
-                            className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-cyan-500 focus:ring-cyan-400"
+                            className="h-4 w-4 rounded border-[#b8b8bd] bg-white accent-[#111114] focus:ring-[#111114]"
                             type="checkbox"
                             checked={selectedYears.includes(year)}
                             onChange={() => toggleYear(year)}
                           />
-                          <span className="font-semibold text-slate-200">{year}</span>
+                          <span className="font-semibold text-[#111114]">{year}</span>
                         </span>
-                        <span className="text-xs text-slate-500">{count}</span>
+                        <span className="text-xs text-[#6e6e73]">{count}</span>
                       </label>
                     );
                   })}
@@ -216,12 +216,12 @@ export default function TimelineExplorer() {
             <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
               <button
                 type="button"
-                className="rounded-xl border border-cyan-300/60 px-6 py-3 text-xs font-bold uppercase tracking-[1.5px] text-cyan-200 transition-colors hover:bg-cyan-300 hover:text-slate-950"
+                className="rounded-full bg-[#111114] px-6 py-3 text-xs font-semibold text-white transition-colors hover:bg-[#303034]"
                 onClick={() => setModalOpen(true)}
               >
                 Update your timeline
               </button>
-              <span className="text-xs uppercase tracking-[1.5px] text-slate-500">
+              <span className="text-[0.68rem] uppercase tracking-[0.12em] text-[#6e6e73]">
                 {adminState === "checking"
                   ? "Checking session"
                   : adminState === "admin"
@@ -230,37 +230,37 @@ export default function TimelineExplorer() {
               </span>
             </div>
 
-            <ol className="relative ml-3 border-l border-white/15 md:ml-5">
+            <ol className="relative ml-3 border-l border-[#e8e8ea] md:ml-5">
               {filteredEntries.map((entry) => (
                 <li className="relative mb-9 ml-7 md:ml-10" key={entry.id}>
-                  <span className="absolute -left-[2.65rem] top-5 flex h-7 w-7 items-center justify-center rounded-full border-4 border-PrimaryColorDark bg-cyan-400 font-mono text-[0.55rem] font-bold text-slate-950 md:-left-[3.3rem] md:h-8 md:w-8">
+                  <span className="absolute -left-[2.65rem] top-5 flex h-7 w-7 items-center justify-center rounded-full border-4 border-white bg-[#111114] font-mono text-[0.55rem] font-bold text-white md:-left-[3.3rem] md:h-8 md:w-8">
                     {String(entry.year).slice(-2)}
                   </span>
-                  <article className="rounded-[20px] border border-white/10 bg-slate-700/90 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:-translate-y-1 md:p-6">
+                  <article className="rounded-[10px] border border-[#e8e8ea] bg-white p-5 transition-colors hover:border-[#b8b8bd] md:p-6">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                       <div>
-                        <div className="text-xs font-medium uppercase tracking-[1.5px] text-cyan-300">
+                        <div className="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[#6e6e73]">
                           {entry.year}
                         </div>
-                        <h2 className="mt-2 font-display text-xl font-black text-white md:text-2xl">
+                        <h2 className="mt-2 font-sans text-xl font-semibold tracking-[-0.02em] text-[#111114] md:text-2xl">
                           {entry.title}
                         </h2>
                       </div>
-                      <time className="shrink-0 text-xs text-slate-400">
+                      <time className="shrink-0 text-xs text-[#6e6e73]">
                         {entry.dateLabel}
                       </time>
                     </div>
-                    <p className="mt-4 text-sm leading-7 text-slate-300">
+                    <p className="mt-4 text-sm leading-7 text-[#6e6e73]">
                       {entry.summary}
                     </p>
                     {entry.details && (
-                      <p className="mt-4 rounded-xl border border-white/10 bg-white/[0.05] p-4 text-sm italic leading-7 text-slate-300">
+                      <p className="mt-4 rounded-[10px] bg-[#fafafa] p-4 text-sm italic leading-7 text-[#6e6e73]">
                         {entry.details}
                       </p>
                     )}
                     {entry.detailsHtml && (
                       <div
-                        className="mt-4 rounded-xl border border-white/10 bg-white/[0.05] p-4 text-sm leading-7 text-slate-300 [&_blockquote]:my-4 [&_blockquote]:border-l-4 [&_blockquote]:border-cyan-300/40 [&_blockquote]:pl-4 [&_blockquote]:italic [&_font]:font-mono [&_h1]:text-3xl [&_h2]:text-2xl [&_h3]:text-xl [&_h4]:text-lg [&_h5]:text-base [&_h6]:text-sm [&_ol]:list-decimal [&_ol]:pl-6 [&_pre]:my-4 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-slate-900/70 [&_pre]:p-4 [&_pre]:font-mono [&_ul]:list-disc [&_ul]:pl-6"
+                        className="mt-4 rounded-[10px] bg-[#fafafa] p-4 text-sm leading-7 text-[#6e6e73] [&_blockquote]:my-4 [&_blockquote]:border-l-2 [&_blockquote]:border-[#111114] [&_blockquote]:pl-4 [&_blockquote]:italic [&_font]:font-mono [&_h1]:text-3xl [&_h1]:font-semibold [&_h2]:text-2xl [&_h2]:font-semibold [&_h3]:text-xl [&_h3]:font-semibold [&_h4]:text-lg [&_h4]:font-semibold [&_h5]:text-base [&_h5]:font-semibold [&_h6]:text-sm [&_h6]:font-semibold [&_ol]:list-decimal [&_ol]:pl-6 [&_pre]:my-4 [&_pre]:overflow-x-auto [&_pre]:rounded-[8px] [&_pre]:bg-[#111114] [&_pre]:p-4 [&_pre]:font-mono [&_pre]:text-white [&_ul]:list-disc [&_ul]:pl-6"
                         dangerouslySetInnerHTML={{
                           __html: sanitizeRichText(entry.detailsHtml),
                         }}
@@ -268,7 +268,7 @@ export default function TimelineExplorer() {
                     )}
                     {entry.link && (
                       <a
-                        className="mt-5 inline-flex text-sm font-bold text-cyan-300 hover:text-cyan-200 hover:underline"
+                        className="mt-5 inline-flex text-sm font-semibold text-[#111114] underline decoration-[#b8b8bd] underline-offset-4 hover:decoration-[#111114]"
                         href={entry.link}
                         target={entry.openInNewTab ? "_blank" : undefined}
                         rel={entry.openInNewTab ? "noreferrer" : undefined}
@@ -282,7 +282,7 @@ export default function TimelineExplorer() {
             </ol>
 
             {filteredEntries.length === 0 && (
-              <div className="rounded-[24px] border border-white/10 py-20 text-center text-slate-400">
+              <div className="rounded-[10px] border border-[#e8e8ea] bg-[#fafafa] py-20 text-center text-sm text-[#6e6e73]">
                 No timeline entries match these filters.
               </div>
             )}

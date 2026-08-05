@@ -6,6 +6,7 @@ interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   ariaLabel?: string;
+  appearance?: "adaptive" | "light";
 }
 
 interface EditorControl {
@@ -38,9 +39,11 @@ export default function RichTextEditor({
   value,
   onChange,
   ariaLabel = "Rich text content",
+  appearance = "adaptive",
 }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const [activeCommands, setActiveCommands] = useState<string[]>([]);
+  const lightAppearance = appearance === "light";
 
   // Synchronize externally loaded HTML without turning contentEditable into a controlled field.
   useEffect(() => {
@@ -97,8 +100,12 @@ export default function RichTextEditor({
       type="button"
       className={`rounded-md px-2 py-1 text-sm transition-colors ${
         activeCommands.includes(label)
-          ? "bg-blue-50 text-blue-600"
-          : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+          ? lightAppearance
+            ? "bg-[#111114] text-white"
+            : "bg-[var(--text)] text-[var(--bg)]"
+          : lightAppearance
+            ? "text-[#6e6e73] hover:bg-[#fafafa] hover:text-[#111114]"
+            : "text-[var(--muted)] hover:bg-[var(--bg)] hover:text-[var(--text)]"
       }`}
       aria-label={`Apply ${label}`}
       aria-pressed={activeCommands.includes(label)}
@@ -113,22 +120,22 @@ export default function RichTextEditor({
   );
 
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-300 bg-white font-serif text-slate-900">
-      <div className="flex flex-wrap gap-1 border-b border-slate-200 p-3">
+    <div className={`overflow-hidden rounded-[10px] border font-sans ${lightAppearance ? "border-[#e8e8ea] bg-white text-[#111114]" : "border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"}`}>
+      <div className={`flex flex-wrap gap-1 border-b p-3 ${lightAppearance ? "border-[#e8e8ea]" : "border-[var(--border)]"}`}>
         {BLOCK_CONTROLS.map(renderControl)}
       </div>
-      <div className="flex flex-wrap gap-1 border-b border-slate-200 px-3 py-2">
+      <div className={`flex flex-wrap gap-1 border-b px-3 py-2 ${lightAppearance ? "border-[#e8e8ea]" : "border-[var(--border)]"}`}>
         {INLINE_CONTROLS.map(renderControl)}
       </div>
       <div className="relative">
         {!value && (
-          <span className="pointer-events-none absolute left-4 top-4 text-base text-slate-400">
+          <span className={`pointer-events-none absolute left-4 top-4 text-base ${lightAppearance ? "text-[#8a8a8f]" : "text-[var(--muted)]"}`}>
             Tell a story...
           </span>
         )}
         <div
           ref={editorRef}
-          className="min-h-64 cursor-text px-4 py-4 text-base leading-7 outline-none [&_blockquote]:my-4 [&_blockquote]:border-l-4 [&_blockquote]:border-slate-200 [&_blockquote]:px-4 [&_blockquote]:italic [&_h1]:text-3xl [&_h2]:text-2xl [&_h3]:text-xl [&_h4]:text-lg [&_h5]:text-base [&_h6]:text-sm [&_ol]:list-decimal [&_ol]:pl-6 [&_pre]:my-4 [&_pre]:rounded-lg [&_pre]:bg-slate-100 [&_pre]:p-4 [&_pre]:font-mono [&_ul]:list-disc [&_ul]:pl-6"
+          className={`min-h-64 cursor-text px-4 py-4 text-base leading-7 outline-none [&_blockquote]:my-4 [&_blockquote]:border-l-2 [&_blockquote]:px-4 [&_blockquote]:italic [&_h1]:text-3xl [&_h1]:font-semibold [&_h2]:text-2xl [&_h2]:font-semibold [&_h3]:text-xl [&_h3]:font-semibold [&_h4]:text-lg [&_h4]:font-semibold [&_h5]:text-base [&_h5]:font-semibold [&_h6]:text-sm [&_h6]:font-semibold [&_ol]:list-decimal [&_ol]:pl-6 [&_pre]:my-4 [&_pre]:rounded-[8px] [&_pre]:p-4 [&_pre]:font-mono [&_ul]:list-disc [&_ul]:pl-6 ${lightAppearance ? "[&_blockquote]:border-[#111114] [&_pre]:bg-[#111114] [&_pre]:text-white" : "[&_blockquote]:border-[var(--text)] [&_pre]:bg-[var(--text)] [&_pre]:text-[var(--bg)]"}`}
           contentEditable
           role="textbox"
           aria-multiline="true"

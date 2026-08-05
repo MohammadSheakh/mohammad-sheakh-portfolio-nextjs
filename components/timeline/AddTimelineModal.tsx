@@ -32,7 +32,7 @@ const INITIAL_FORM: TimelineForm = {
 };
 
 const fieldClassName =
-  "mt-2 w-full rounded-xl border border-slate-500/70 bg-slate-700 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20";
+  "mt-2 w-full rounded-[10px] border border-[#e8e8ea] bg-[#fafafa] px-4 py-3 text-sm text-[#111114] outline-none placeholder:text-[#8a8a8f] focus:border-[#111114] focus:bg-white focus:ring-1 focus:ring-[#111114]";
 
 interface AddTimelineModalProps {
   open: boolean;
@@ -120,7 +120,7 @@ export default function AddTimelineModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/75 p-3 backdrop-blur-sm md:p-6">
+    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/40 p-3 md:p-6">
       <button
         className="absolute inset-0 cursor-default"
         type="button"
@@ -128,13 +128,13 @@ export default function AddTimelineModal({
         onClick={onClose}
       />
       <div
-        className="relative z-[1] max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-[28px] border border-white/15 bg-slate-900 p-6 text-slate-200 shadow-2xl md:p-8"
+        className="relative z-[1] max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-[10px] border border-[#e8e8ea] bg-white p-6 font-sans text-[#111114] md:p-8"
         role="dialog"
         aria-modal="true"
         aria-labelledby="timeline-modal-title"
       >
         <button
-          className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-700 text-xl text-white transition-colors hover:bg-slate-600"
+          className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-[#e8e8ea] bg-white text-xl text-[#111114] transition-colors hover:bg-[#fafafa]"
           type="button"
           aria-label="Close"
           onClick={onClose}
@@ -142,16 +142,16 @@ export default function AddTimelineModal({
           ×
         </button>
 
-        <h2 id="timeline-modal-title" className="pr-14 font-display text-2xl font-black text-white">
+        <h2 id="timeline-modal-title" className="pr-14 text-2xl font-semibold tracking-[-0.025em] text-[#111114]">
           Update your timeline
         </h2>
-        <p className="mt-2 text-sm leading-6 text-slate-400">
+        <p className="mt-2 text-sm leading-6 text-[#6e6e73]">
           Add a milestone, work update, or important moment.
         </p>
 
         <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
           <div className="grid gap-5 sm:grid-cols-2">
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-[#6e6e73]">
               Year
               <input
                 className={fieldClassName}
@@ -163,7 +163,7 @@ export default function AddTimelineModal({
                 onChange={(event) => updateField("year", event.target.value)}
               />
             </label>
-            <label className="text-sm text-slate-300">
+            <label className="text-sm text-[#6e6e73]">
               Date label
               <input
                 className={fieldClassName}
@@ -176,7 +176,7 @@ export default function AddTimelineModal({
             </label>
           </div>
 
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-[#6e6e73]">
             Timeline heading
             <input
               className={fieldClassName}
@@ -188,7 +188,7 @@ export default function AddTimelineModal({
             />
           </label>
 
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-[#6e6e73]">
             Summary
             <textarea
               className={`${fieldClassName} min-h-24 resize-y`}
@@ -200,9 +200,9 @@ export default function AddTimelineModal({
           </label>
 
           <div className="flex justify-end">
-            <label className="inline-flex items-center gap-2 text-sm text-slate-300">
+            <label className="inline-flex items-center gap-2 text-sm text-[#6e6e73]">
               <input
-                className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-cyan-500 focus:ring-cyan-400"
+                className="h-4 w-4 rounded border-[#b8b8bd] bg-white accent-[#111114] focus:ring-[#111114]"
                 type="checkbox"
                 checked={form.richEditor}
                 onChange={(event) => updateField("richEditor", event.target.checked)}
@@ -213,12 +213,13 @@ export default function AddTimelineModal({
 
           {form.richEditor ? (
             <RichTextEditor
+              appearance="light"
               value={form.detailsHtml}
               onChange={(value) => updateField("detailsHtml", value)}
             />
           ) : (
-            <label className="block text-sm text-slate-300">
-              Timeline details <span className="text-slate-500">(optional)</span>
+            <label className="block text-sm text-[#6e6e73]">
+              Timeline details <span className="text-[#8a8a8f]">(optional)</span>
               <textarea
                 className={`${fieldClassName} min-h-28 resize-y`}
                 placeholder="Add more context"
@@ -229,8 +230,8 @@ export default function AddTimelineModal({
           )}
 
           <div className="grid gap-5 sm:grid-cols-2">
-            <label className="text-sm text-slate-300">
-              Link title <span className="text-slate-500">(optional)</span>
+            <label className="text-sm text-[#6e6e73]">
+              Link title <span className="text-[#8a8a8f]">(optional)</span>
               <input
                 className={fieldClassName}
                 type="text"
@@ -239,8 +240,8 @@ export default function AddTimelineModal({
                 onChange={(event) => updateField("linkTitle", event.target.value)}
               />
             </label>
-            <label className="text-sm text-slate-300">
-              Link URL <span className="text-slate-500">(optional)</span>
+            <label className="text-sm text-[#6e6e73]">
+              Link URL <span className="text-[#8a8a8f]">(optional)</span>
               <input
                 className={fieldClassName}
                 type="url"
@@ -251,9 +252,9 @@ export default function AddTimelineModal({
             </label>
           </div>
 
-          <label className="flex items-center justify-end gap-2 text-sm text-slate-300">
+          <label className="flex items-center justify-end gap-2 text-sm text-[#6e6e73]">
             <input
-              className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-cyan-500 focus:ring-cyan-400"
+              className="h-4 w-4 rounded border-[#b8b8bd] bg-white accent-[#111114] focus:ring-[#111114]"
               type="checkbox"
               checked={form.openInNewTab}
               onChange={(event) => updateField("openInNewTab", event.target.checked)}
@@ -261,16 +262,20 @@ export default function AddTimelineModal({
             Open link in a new tab
           </label>
 
-          {error && <p className="text-sm text-rose-300">{error}</p>}
+          {error && (
+            <p className="rounded-[10px] bg-rose-50 px-4 py-3 text-sm text-rose-700">
+              {error}
+            </p>
+          )}
           {!isAdmin && (
-            <p className="rounded-xl bg-amber-300/10 px-4 py-3 text-sm text-amber-200">
+            <p className="rounded-[10px] bg-amber-50 px-4 py-3 text-sm text-amber-800">
               Admin sign-in is required to post this timeline update.
             </p>
           )}
 
           <div className="flex justify-end">
             <button
-              className="rounded-xl bg-cyan-400 px-6 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
+              className="rounded-full bg-[#111114] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#303034] disabled:cursor-not-allowed disabled:opacity-35"
               type="submit"
               disabled={!isAdmin || submitting}
             >
